@@ -17,7 +17,8 @@ function buttonClick() {
 function calc(inputStr) {
     let results = {};
     results.tokenList = lexicalAnalysis(inputStr);
-    results.calcResult = syntacticAnalysis(results.tokenList).result();
+    let syntacticResult = syntacticAnalysis(results.tokenList);
+    results.calcResult = syntacticResult == null ? "構文解析が失敗しました" : syntacticResult.result();
     return results;
 }
 
@@ -88,7 +89,7 @@ function lexicalAnalysis(inputStr) {
 
 BNF記法
 
-<num> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+<num> ::= (0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9)+
 <expr>::= <term> { ('+' | '-') <term> }
 <term>::= <num> { ('*' | '/') <num> }
 */
@@ -159,7 +160,7 @@ function syntacticAnalysis(tokenList) {
     }
 
     function numParser() {
-        if (tokenList[index].tokenType == "num") {
+        if (tokenList.length > index && tokenList[index].tokenType == "num") {
             let numExpr = new NumExpr(tokenList[index].value);
             index++;
             return numExpr;
