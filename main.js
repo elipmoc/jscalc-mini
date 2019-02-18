@@ -6,6 +6,7 @@ document.getElementById("button").onclick = buttonClick;
 function buttonClick() {
     // document.getElementById("タグid").value でテキストボックスなどに入力された値を取得できる。
     const result = calc(document.getElementById("input").value);
+    //トークンリストを字句解析結果テキストエリアに表示させる
     document.getElementById("tokenResult").value = tokenListToString(result.tokenList);
     document.getElementById("calcResult").value = result.calcResult;
 }
