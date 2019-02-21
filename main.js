@@ -8,6 +8,7 @@ function buttonClick() {
     const result = calc(document.getElementById("input").value);
     //トークンリストを字句解析結果テキストエリアに表示させる
     document.getElementById("tokenResult").value = tokenListToString(result.tokenList);
+    //計算結果を表示させる
     document.getElementById("calcResult").value = result.calcResult;
 }
 
